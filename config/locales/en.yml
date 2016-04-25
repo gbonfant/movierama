@@ -18,6 +18,15 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello world"
+
+  mailer:
+    like:
+      subject:
+        Someone likes your movie!
+      body: "Hey %{name}, someone has liked your movie: %{title}"
+    hate:
+      subject:
+        Someone hates your movie
+      body: "Hello %{name}, unfortunately someone has hated your movie: %{title}"
