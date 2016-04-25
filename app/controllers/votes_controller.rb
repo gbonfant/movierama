@@ -3,6 +3,8 @@ class VotesController < ApplicationController
     authorize! :vote, _movie
 
     _voter.vote(_type)
+    # _mailer.deliver_later
+    _mailer.deliver
     redirect_to root_path, notice: 'Vote cast'
   end
 
@@ -25,6 +27,10 @@ class VotesController < ApplicationController
     when 'hate' then :hate
     else raise
     end
+  end
+
+  def _mailer
+    MovieNotificationMailer.like_or_dislike_email(_movie, _type)
   end
 
   def _movie

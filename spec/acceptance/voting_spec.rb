@@ -11,7 +11,8 @@ RSpec.describe 'vote on movies', type: :feature do
   before do
     author = User.create(
       uid:  'null|12345',
-      name: 'Bob'
+      name: 'Bob',
+      email: 'bob@email.com'
     )
     Movie.create(
       title:        'Empire strikes back',
@@ -38,11 +39,13 @@ RSpec.describe 'vote on movies', type: :feature do
     it 'can like' do
       page.like('Empire strikes back')
       expect(page).to have_vote_message
+      expect(ActionMailer::Base.deliveries.count).not_to be_zero
     end
 
     it 'can hate' do
       page.hate('Empire strikes back')
       expect(page).to have_vote_message
+      expect(ActionMailer::Base.deliveries.count).not_to be_zero
     end
 
     it 'can unlike' do
@@ -74,8 +77,4 @@ RSpec.describe 'vote on movies', type: :feature do
       }.to raise_error(Capybara::ElementNotFound)
     end
   end
-
 end
-
-
-
