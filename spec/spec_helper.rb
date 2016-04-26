@@ -87,5 +87,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Ohm.redis.call 'FLUSHDB'
+    ActionMailer::Base.deliveries.clear
+    Sidekiq::Worker.clear_all
   end
 end
